@@ -1,0 +1,13 @@
+import raii
+
+main :: () {
+    mut app := raii.alloc(App {
+        title: "love story!!!"
+    })
+    defer => raii.dealloc(app)
+}
+
+
+main :: () {
+    
+}

@@ -1,0 +1,6 @@
+add :: (x num, y num) num {
+    return x + y
+}
+
+square :: (x num) => x ^ 2
+

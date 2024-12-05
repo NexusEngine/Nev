@@ -1,0 +1,24 @@
+import raylib
+
+data win_size := i32, i32(600, 400)
+data rect_size := i32, i32(40, 40)
+
+main :: () {
+    mut win := raylib.Window {
+        size: win_size
+        title: "nev :b"
+    }
+
+    win.loop => win.drawing {
+        win.clear(0x00000000)
+        win.draw_rect(
+            win_size / 2 - rect_size / 2
+            rect_size
+            Color(0xFF5544)
+        )
+    }
+}
+
+
+
+

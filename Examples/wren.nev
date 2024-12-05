@@ -1,8 +1,8 @@
 use cli {*}
 
-Wren :: Kind {
-  fly_to :: (city: Str) => write("Flying to $city")
-}
+Wren :: Kind {}
+
+(Wren).fly_to :: (city: Str) => write("Flying to $city")
 
 main :: {
   write("Hello, world!")

@@ -1,11 +1,11 @@
 main :: {
     
     // to declare a mutable variable
-    mut name: dataType := DataType(value)
+    mut name := DataType(value)
     mut name := value
     // for example
     mut index := Num(14235)
-    mut title = "Hello, world!"
+    mut title := "Hello, world!"
 
     // to declare an immutable (u can spicify datatype)
     name := "abdelrahman" // static size string: Str[11]

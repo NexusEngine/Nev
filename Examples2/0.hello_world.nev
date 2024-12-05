@@ -1,0 +1,5 @@
+use term {*}
+
+main :: () {
+    write "hello world!"
+}

@@ -1,0 +1,68 @@
+Circle :: data {
+    radius    num
+    position  (num, num)
+
+    area :: () => π * me.radius ^(2)
+    double_area :: () => me.radius *= √(2)
+}
+
+Circle :: data {
+    mut radius    num
+    mut position  (num, num)
+
+    area :: () => π * me.radius ^(2)
+    mut double_area :: () => me.radius *= √(2)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+import math
+
+Circle :: data {
+    mut radius   num
+    mut position (num, num)
+}
+
+Circle.area :: () num {
+    return π * me.radius ^(2)
+}
+mut Circle.double_area :: () {
+    me.radius *= √(2)
+}
+
+
+
+
+
+import math
+
+Position :: type { math.Vec2[f32] }
+Velocity :: type { math.Vec2[f32] }
+
+Archetype[T] :: data {
+    entities    [256]i32
+    components  Map[i32, &data]
+}
+
+mut Archetype[T] << get_by_id :: (id i32) {
+    return me.entities[id]
+}
+
+mut Archetype[T].get_by_id :: (id i32) {
+    return me.entities[id]
+}
+
+
+
+
+

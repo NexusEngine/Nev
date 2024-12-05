@@ -1,0 +1,52 @@
+
+# Image type [a path for img].
+Image :: type { str }
+
+#[ Rocket:
+    Rocket is a standalone entity.
+    Rocket speed and direction is
+    taken from launcher Cannon.
+]#
+Rocket :: data {
+    damage    num    # damage number
+    shape     Image  # image of rocket
+    range     Image
+}
+
+#[ Rocket Drawing State
+    The time that rocket become rendered.
+    OnReady -> draw it when cannon
+        be ready to throw a rocket
+        ex: huge rockets
+    OnFire -> draw it when cannon discover
+        any near enemy and start attack
+        ex: small bullets
+]#
+RDS :: enum {
+    OnReady
+    OnFire
+}
+
+#[ Cannon:
+    Cannon is a rockets launcher
+]#
+Cannon :: data {
+    speed     num    # launch speed
+    reload    num    # reload time
+    direction num    # cannon direction
+    queue     num    # numbers of queues
+    shape     Image  # image of cannon
+    rds       RDS    # Rocket Drawing State
+    rocket    Rocket # rocket itself
+}
+
+#[ Tower:
+    You can change the cannon and
+    base to upgrade the Tower.
+]#
+Tower :: data {
+    base      Image  # cannon base
+    cannon    Cannon # cannon itself
+}
+
+
