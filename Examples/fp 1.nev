@@ -1,19 +1,58 @@
-use cli {*}
+import term {*}
 
 
-// higher-order Closures... functions example
-run :: (v: I32, f: (it: I32)I32)I32 => f(v) // u used it to make defualt id for argument
+# higher-order Closures... functions example
+run :: (v i32, f (it i32>i32)) i32 => f(v) # u used it to make defualt id for argument
 
-main :: {
+main :: () {
   mut x := 50
 
-  add_x :: (y: I32, x) => x + y
-  square :: (x: I32)I32 => x ^ 2
+  add_x :: (y i32, x) => x + y
+  square :: (x i32) i32 => x ^ 2
 
   write(add_x(run(5, it ^ 2)): Line)
   write(add_x(run(5, square)): Line)
-  /* output:
+  #[ Output:
     75
     75
-  */
+  ]#
 }
+
+
+
+
+
+
+import term {*}
+
+run :: (v i32, f (it i32>i32)) i32 => f(v)
+
+main :: () {
+    mut x := 50
+
+    add_x :: (y i32, x) => x + y
+    square :: (x i32) i32 => x ^ 2
+
+    write add_x(run(5, { it ^ 2 })): Line
+    write add_x(run(5, square)): Line
+}
+
+
+
+import term {*}
+
+i32 run(v i32, f (it i32>i32)) f(v)
+
+nil main() {
+  mut x: i32 = 50
+
+  nil add_x(y i32, x) x + y
+  i32 square(x i32) x ^ 2
+
+  write add_x(run(5, { it ^ 2 })): Line
+  write add_x(run(5, square)): Line
+}
+#[ Output:
+    75
+    75
+]#

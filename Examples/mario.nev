@@ -1,41 +1,41 @@
-Player :: Kind {
-  mut state: MarioState
+Player :: data {
+    mut state MarioState
 }
 
-mut Player << collect :: (item: Item) {
-  me.state = when me.state, item {
-    (Mario, Mushroom) => SuperMario
-    (_, Flower) => FireMario
-    (_, Feather) => CapeMario
-    (_, Mushroom) => me.state
-  }
+mut Player.collect :: (item Item) {
+    me.state = match me.state, item {
+        (Mario, Mushroom) => SuperMario
+        (_, Flower) => FireMario
+        (_, Feather) => CapeMario
+        (_, Mushroom) => me.state
+    }
 }
 
-MarioState :: Enum {
-  | Mario
-  | SuperMario
-  | FireMario
-  | Mario
+MarioState :: enum {
+    Mario
+    SuperMario
+    FireMario
+    Mario
 }
 
-Mario :: Kind {}
-SuperMario :: Kind {}
-FireMario :: Kind {}
-CapeMario :: Kind {}
+Mario :: data {}
+SuperMario :: data {}
+FireMario :: data {}
+CapeMario :: data {}
 
-Item :: Kind {
-  state: ItemState
+Item :: data {
+  state ItemState
 }
 
-ItemState :: Enum {
-  Mushroom
-  Flower
-  Feather
+ItemState :: enum {
+    Mushroom
+    Flower
+    Feather
 }
 
-main :: {
-    p1 := Player {
-        state = Mario
+main :: () {
+    mut p1 := Player {
+        state: Mario
     }
     p1.collect(Mushroom)
 }

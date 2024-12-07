@@ -1,16 +1,75 @@
-use cli {*}
+import term {*}
 
-main :: {
-  /*
-    runs 1000000 coroutines using add go keywords before scope
-    and use await scope to wait every coroutines in it
-    and make canal(called channel in other languages)
-  */
+main :: () {
+    #[
+        runs 1000000 coroutines using add go keywords before scope
+        and use await scope to wait every coroutines in it
+        and make canal(called channel in other languages)
+    ]#
 
-  c := Canal[Str]
-  await => for 1_000_000, (i) => go {
-    wait(2: S)
-    c << "that is the $i time that i see you!"
-  }
-  c.per(write(it: Line))
+    mut c := []str
+    await => repeat 1_000_000, (i) => go {
+        wait(2: S)
+        c << "that is the $i time that i see you!"
+    }
+    c.per => write it: Line
+}
+
+# note that one of compiler libraries will change code to be
+
+main :: () {
+    mut c := Canal[str]
+    await({
+        repeat 1_000_000 ((i) {
+            go({
+                wait_s(2)
+                c << "that is the $i time that i see you!"
+            })
+        })
+    })
+    c.per({
+        write_line(it)
+    })
+}
+
+
+
+
+import term {*}
+
+main :: () {
+    mut c := []str {}
+    await => repeat 1_000_000, (i) => go {
+        wait(2: S)
+        c << "that is the $i time that i see you!"
+    }
+    c.per => write(it: Line)
+}
+
+
+import term {*}
+
+#[ strict: off ]#
+any main() {
+    c: []str
+    await => repeat 1_000_000, (i) => go {
+        wait(2: S)
+        c << "that is the $i time that i see you!"
+    }
+    c.per => write(it: Line)
+}
+#[ how compiler see it ]#
+nil main() {
+    mut c: Canal[str]
+    await({
+        repeat(1_000_000, (i) {
+            go({
+                wait_s(2)
+                c << "that is the $[i.str()] time that i see you!"
+            })
+        })
+    })
+    for it in c {
+        write_line(it)
+    }
 }

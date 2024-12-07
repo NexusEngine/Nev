@@ -1,24 +1,7 @@
-use term {*}
-
-
-#[ string ]#
-main :: () {
-
-    # array: 6 bytes
-    name := "hesham"
-    # array: 4 bytes
-    mut name := u8[_]("amir")
-    # array: 5 bytes
-    mut name := u8[5]("amir")
-    # linked-list
-    mut nickname := "MrPixel"
-    mut text := u8[]("texts...")
-
-}
+import term {*}
 
 #[ string ]#
 main :: () {
-
     # array: 6 bytes
     name := "hesham"
     # array: 4 bytes
@@ -28,7 +11,6 @@ main :: () {
     # linked-list
     mut nickname := "MrPixel"
     mut text := []u8("texts...")
-
 }
 
 

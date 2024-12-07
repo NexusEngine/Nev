@@ -1,46 +1,121 @@
-Vector2 :: Kind { mut x, y: I16 }
+import observer
+
+Vector2 :: data { mut x i16, mut y i16 }
 
 
-Block :: Enum {
-  Land
-  Wall
-  Water
-  Hole
+Block :: enum {
+    Land
+    Wall
+    Water
+    Hole
 }
 
-Map :: Kind(size, startup_position, target: Vector2) {
-  players: [Ptr[_ActivePlayer]] = []
+Map :: data {
+    size               Vector2
+    startup_position   Vector2
+    target             Vector2
 
-  mut world_blocks: Ops[[[Block: size.x]: size.y]] {
-    set << _block {
-      if _blocks.len == size.y & _blocks[0].len == size.x =>
-        world_blocks = _blocks
+    players            []ActivePlayer
+
+    mut world_blocks   Ops[[size.y][size.x]Block] {
+        set << (blocks) {
+            if blocks.len, blocks[0].len == me.size.y, me.size.x {
+                world_blocks = blocks
+            }
+        }
     }
-  }
-    
-  set_block :: (position: Vector2, block: Block) {
+}
+
+mut Map.set_block :: (position Vector2, block Block) {
     if position.y < size.y & position.x < size.x {
-      world_blocks[position.y][position.x] = block
+        world_blocks[position.y][position.x] = block
     }
-  }
-
-  show_in_window :: => go {
-    // code render the map using raylib
-  }
 }
 
-_ActivePlayer :: Kind {
-  @INIT :: (map: mut Map) => map.players << me.ptr
-    
-  mut abilities = [Enum { Fly, Sweam, SkipWalls }]
-  mut is_won = false
-  _memory: [[Enum { Unknown, Poked, NotPosible }]]
-  play_once :: {
-    // algo code
-  }
-},
+Map.render :: () => go {
+    # code render the map using raylib
+}
 
-Player :: Enum {
-    Active: _ActivePlayer
+
+
+ActivePlayer :: data {
+    mut is_won      bit
+    mut position    Vector2
+    mut abilities   []enum { Fly, Sweam, SkipWalls }
+    mut memory      [][]enum { Unknown, Poked, NotPosible }
+}
+
+mut new :: (map mut Map) ActivePlayer => map.players << me.ptr
+
+mut ActivePlayer.play_once :: () {
+    # algo code
+}
+
+
+Player :: enum {
+    Active(ActivePlayer)
+    Idle
+}
+
+
+
+
+
+
+
+Vector2 :: data { x i16, y i16 }
+
+
+Block :: enum {
+    Land
+    Wall
+    Water
+    Hole
+}
+
+Map :: data {
+    size               Vector2
+    startup_position   Vector2
+    target             Vector2
+
+    players            []ActivePlayer
+
+    world_blocks       Ops[[size.y][size.x]Block] {
+        set << (blocks) {
+            if blocks.len, blocks[0].len == me.size.y, me.size.x {
+                world_blocks = blocks
+            }
+        }
+    }
+}
+
+Map.set_block :: (position Vector2, block Block) {
+    if position.y < size.y & position.x < size.x {
+        world_blocks[position.y][position.x] = block
+    }
+}
+
+Map.render :: () => go {
+    # code render the map using raylib
+}
+
+
+
+ActivePlayer :: data {
+    is_won      bit
+    position    Vector2
+    abilities   []enum { Fly, Sweam, SkipWalls }
+    memory      [][]enum { Unknown, Poked, NotPosible }
+}
+
+new :: (map Map) ActivePlayer => map.players << me.ptr
+
+ActivePlayer.play_once :: () {
+    # algo code
+}
+
+
+Player :: enum {
+    Active(ActivePlayer)
     Idle
 }

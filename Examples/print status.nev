@@ -1,0 +1,134 @@
+import term {*}
+
+any print_status(args [3]any)
+{
+    name:   str = args.filter(it is str).one()!
+    age:    num = args.filter(it is num).one()!
+    status: bit = args.filter(it is bit).one()!
+
+    message: str = "hello $name, ur $age years old, "
+    message << when status ==
+    {
+        true  => "ur available for hiring!"
+        false => "ur unavailable for hiring!"
+    }
+    write message: Line
+}
+
+nil main() {
+    print_status(24, "tabot", false)
+    print_status("amir", 16, true)
+    print_status(13, "ziad", false)
+    print_status(19, true, "hesham")
+    print_status("ali", true, 15)
+}
+
+# ---------////////////////
+
+import term {*}
+
+print_status :: (args [3]any)
+{
+    name   := args.filter(it is str).one()!
+    age    := args.filter(it is num).one()!
+    status := args.filter(it is bit).one()!
+
+    message := "hello $name, ur $age years old, "
+    message << when status ==
+    {
+        true  => "ur available for hiring!"
+        false => "ur unavailable for hiring!"
+    }
+    write message: Line
+}
+
+main :: () {
+    print_status(24, "tabot", false)
+    print_status("amir", 16, true)
+    print_status(13, "ziad", false)
+    print_status(19, true, "hesham")
+    print_status("ali", true, 15)
+}
+
+
+
+
+
+
+import term {*}
+
+nil print_status(name [10]u8, age i32, status bit)
+{
+    mut message: [60]u8 = "hello $name, ur $age years old, "
+    message << when status ==
+    {
+        true  => "ur available for hiring!"
+        false => "ur unavailable for hiring!"
+    }
+    write message: Line
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import term {*}
+
+print_status :: (args [3]any) any
+{
+    name   := args.filter(it is str).one()!
+    age    := args.filter(it is num).one()!
+    status := args.filter(it is bit).one()!
+
+    message := "hello $name, ur $age years old, "
+    message << if status ==
+    {
+        true  => "ur available for hiring!"
+        false => "ur unavailable for hiring!"
+    }
+    write message: Line
+}
+
+main :: ()
+{
+    print_status(24, "tabot", false)
+    print_status("amir", 16, true)
+    print_status(13, "ziad", false)
+    print_status(19, true, "hesham")
+    print_status("ali", true, 15)
+}
+
+
+
+import term {*}
+
+nil print_status(name [10]u8, age i32, status bit)
+{
+    mut message: [60]u8 = "hello $name, ur $age years old, "
+    message << when status ==
+    {
+        true  => "ur available for hiring!"
+        false => "ur unavailable for hiring!"
+    }
+    write message: Line
+}
+

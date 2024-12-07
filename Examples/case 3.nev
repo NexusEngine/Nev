@@ -1,34 +1,34 @@
-// That is also param but it doesn't split that functions which use it but edit parameters 
-// U could let one member of param(the default) like m using _ in the bellow example
+# That is also param but it doesn't split that functions which use it but edit parameters 
+# U could let one member of param(the default) like m using _ in the bellow example
 
-use cli {*}
+import term {*}
 
-DistanceUnit :: Case(F32) {
-	cm(it * 10 ^ -2)
-	_m
-	km(it * 10 ^ 3)
+DistanceUnit :: case(F32) {
+	CM { it * 10 ^ -2 }
+	_M
+	KM { it * 10 ^ 3 }
 }
 
-jump :: (x: DistanceUnit) {
-	write("Jumped ${x}m");
+jump :: (x DistanceUnit) {
+	write "Jumped ${x}m"
 }
 
 main :: {
-	jump(29: CM) // Jumped 0.29m
+	jump(29: CM) # Jumped 0.29m
 }
 
 
 
-// compiler will convert it to be
+# compiler will convert it to be
 
 
 
 jump :: (x: F32)nil {
-  write("Jumped ${x}m")
+    write "Jumped ${x}m"
 }
 
-main :: {
-  jump(0.29) // Jumped 0.29m
+main :: () {
+    jump(0.29) # Jumped 0.29m
 }
 
 

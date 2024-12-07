@@ -1,5 +1,5 @@
 use term {*}
 
 main :: () {
-    write "hello world!"
+    write "hello world!": Line
 }

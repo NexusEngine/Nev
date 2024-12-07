@@ -1,25 +1,27 @@
-use cli {*}
-use observer {*}
+import {
+    term {*}
+    observer {*}
+}
 
-Window :: Kind {
-    mut size: Obs[Vector2] {
+Window :: data {
+    mut size Obs[Vector2] {
         on_set << render 
     }
-    mut background: Obs[Color] {
+    mut background Obs[Color] {
         on_set << {
           render()
-          write("background changed")
+          write "background changed": Line
         }
     }
-    render :: {
-        write("a new frame rendered": line)
+    render :: () {
+        write "a new frame rendered": Line
     }
 }
 
-main :: {
-    win := Window {
-        size = (600, 4008)
+main :: () {
+    mut win := Window {
+        size: (600, 4008)
     }
-    win.size = (800, 600)  // This'll automatically call render
-    win.background = "#ff5544" // This also
+    win.size = (800, 600)  # This'll automatically call render
+    win.background = "#ff5544" # This also
 }

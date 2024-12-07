@@ -1,29 +1,29 @@
-use ./map_game.nev
-use cli
+import ./map_game.nev
+import term
 
-main :: {
-  hello_map := Map((10,10), (1,1), (9,9)).world_blocks([
-    [Wall, Wall, Wall, Wall, Wall, Wall, Wall, Wall, Wall, Wall]
-    [Wall, Air , Air , Air , Wall, Wall, Wall, Wall, Wall, Wall]
-    [Wall, Air , Wall, Air , Wall, Wall, Wall, Wall, Wall, Wall]
-    [Wall, Air , Wall, Air , Air , Air , Air , Air , Wall, Wall]
-    [Wall, Air , Wall, Wall, Wall, Air , Wall, Wall, Air , Wall]
-    [Wall, Wall, Wall, Wall, Wall, Air , Air , Wall, Wall, Wall]
-    [Wall, Wall, Wall, Wall, Air , Air , Air , Hole, Wall, Wall]
-    [Wall, Wall, Wall, Wall, Wall, Air , Wall, Air , Air , Wall]
-    [Wall, Wall, Wall, Wall, Wall, Air , Air , Air , Air , Wall]
-    [Wall, Wall, Wall, Wall, Wall, Wall, Wall, Wall, Wall, Wall]
+main :: () {
+    hello_map := Map((10,10), (1,1), (9,9)).world_blocks([
+        [Wall Wall Wall Wall Wall Wall Wall Wall Wall Wall]
+        [Wall Air  Air  Air  Wall Wall Wall Wall Wall Wall]
+        [Wall Air  Wall Air  Wall Wall Wall Wall Wall Wall]
+        [Wall Air  Wall Air  Air  Air  Air  Air  Wall Wall]
+        [Wall Air  Wall Wall Wall Air  Wall Wall Air  Wall]
+        [Wall Wall Wall Wall Wall Air  Air  Wall Wall Wall]
+        [Wall Wall Wall Wall Air  Air  Air  Hole Wall Wall]
+        [Wall Wall Wall Wall Wall Air  Wall Air  Air  Wall]
+        [Wall Wall Wall Wall Wall Air  Air  Air  Air  Wall]
+        [Wall Wall Wall Wall Wall Wall Wall Wall Wall Wall]
     ])
 
-  youssef := Player.Active(hello_map).abilities([SkipWalls])
+    youssef := Player.Active(hello_map).abilities([SkipWalls])
 
-  for !youssef.is_won {
-    try youssef.play_once or {
-      write("youssef is a loser :|")
+    while !youssef.is_won {
+        try youssef.play_once or {
+            write("youssef is a loser :|")
+        }
     }
-  }
-  else {
-    youssef = Idle
-    write("youssef has won the game!!!")
-  }
+    else {
+        youssef = Idle
+        write("youssef has won the game!!!")
+    }
 }

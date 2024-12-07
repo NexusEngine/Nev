@@ -1,6 +1,35 @@
+# module
+module calcs
+
 add :: (x num, y num) num {
     return x + y
 }
 
 square :: (x num) => x ^ 2
+
+# usage
+module main
+
+main :: () {
+    write square(add(5, 6)): Line
+}
+
+
+
+# module
+module calcs
+
+num add(x num, y num) {
+    return x + y
+}
+
+num square(x num) x ^ 2
+
+# usage
+module main
+
+nil main() {
+    write square(add(5, 6)): Line
+}
+
 

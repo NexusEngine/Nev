@@ -1,3 +1,4 @@
+#[ Nev: O ]#
 Circle :: data {
     radius    num
     position  (num, num)
@@ -6,63 +7,32 @@ Circle :: data {
     double_area :: () => me.radius *= √(2)
 }
 
-Circle :: data {
-    mut radius    num
-    mut position  (num, num)
 
-    area :: () => π * me.radius ^(2)
-    mut double_area :: () => me.radius *= √(2)
+#[ Nev: N ]#
+data Circle
+{
+    radius    num
+    position  (num, num)
+
+    num area() π * me.radius ^(2)
+    num double_area() me.radius *= √(2)
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-import math
-
-Circle :: data {
-    mut radius   num
-    mut position (num, num)
+#[ strict ]#
+data Circle
+{
+    mut radius    f32
+    mut position  (f32, f32)
 }
 
-Circle.area :: () num {
-    return π * me.radius ^(2)
+num Circle.area() {
+    π * me.radius ^(2)
 }
-mut Circle.double_area :: () {
+mut nil Circle.double_area() {
     me.radius *= √(2)
 }
-
-
-
-
-
-import math
-
-Position :: type { math.Vec2[f32] }
-Velocity :: type { math.Vec2[f32] }
-
-Archetype[T] :: data {
-    entities    [256]i32
-    components  Map[i32, &data]
-}
-
-mut Archetype[T] << get_by_id :: (id i32) {
-    return me.entities[id]
-}
-
-mut Archetype[T].get_by_id :: (id i32) {
-    return me.entities[id]
-}
-
-
-
 
 

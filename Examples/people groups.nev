@@ -1,24 +1,24 @@
-use {
-  cli {*}
-  random
+import {
+    term {*}
+    random
 }
 
-Person :: Kind { age: U32; name: Str[10] }
+Person :: data { age u32, name [20]u8 }
 
 main :: () {
-  // Generate a list of random people
-  people := [Person: 30].per
-    |> age(random.u32(1, 35))
-    |> name(random.str(10, { english_alphabet = true }))
+    # Generate a list of random people
+    people := [30]Person.per
+        |> age(random.u32(1, 35))
+        |> name(random.str(10, { english_alphabet = true }))
   
-  // Sort them by age
-  people.sort(a.age > b.age)
+    # Sort them by age
+    people.sort => a.age > b.age
 
-  // Group them by age
-  grouped_people := people.group(a.age == b.age)
+    # Group them by age
+    grouped_people := people.group => a.age == b.age
 
-  // Output groups
-  grouped_people.per
-    |> write("People of age ${_[0].age}:": Line)
-    |> per(write("    ${it.nams},": Line))
+    # Output groups
+    grouped_people.per
+        |> write "People of age ${it[0].age}:": Line
+        |> per => write "\t${it.name}": Line
 }

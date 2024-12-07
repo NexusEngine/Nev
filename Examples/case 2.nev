@@ -1,52 +1,52 @@
-use {
-  time
-  cli
+import {
+    time
+    term
 }
 
-// That is parm keyword it is like enum but only able to declare only in function parameters 
+# That is parm keyword it is like enum but only able to declare only in function parameters 
 TimeUnit :: Param(f32) {
-  _Second // defualt
-  Minute
-  Hour
+    _Second # defualt
+    Minute
+    Hour
 }
 
-// That is a function use tagged variable(param) in parameters
-sleep :: (t: TimeUnit) {
-  end_time := time.now + t * if t is {
-    Second { 1000 }
-    Minute { 60000 }
-    Hour { 3600000 }
-  }
-  for time.now < end_time {}
+# That is a function use tagged variable(param) in parameters
+sleep :: (t TimeUnit) {
+    end_time := time.now + t * if t is {
+        Second { 1000 }
+        Minute { 60000 }
+        Hour { 3600000 }
+    }
+    while time.now < end_time;
 }
 
-main :: {
-  sleep(60: Second)
-  sleep(1: Minute)
-  sleep(0.017: Hour)
+main :: () {
+    sleep(60: Second)
+    sleep(1: Minute)
+    sleep(0.017: Hour)
 }
 
-// Param isn't only enum but compiler split functions which use it to get more performance
-// compiler will compiler that code to be near to that
+# Param isn't only enum but compiler split functions which use it to get more performance
+# compiler will compiler that code to be near to that
 
 
-sleep_second :: (t: f32) {
-  end_time := time.now + t * 1000
-  while time.now > end_time;
+sleep_second :: (t f32) {
+    end_time := time.now + t * 1000
+    while time.now < end_time;
 }
 
-sleep_minute :: (t: f32) {
-  end_time := time.now + t * 60000
-  while time.now > end_time;
+sleep_minute :: (t f32) {
+    end_time := time.now + t * 60000
+    while time.now < end_time;
 }
 
-sleep_hour :: (t: f32) {
-  end_time := time.now + t * 3600000
-  while time.now > end_time;
+sleep_hour :: (t f32) {
+    end_time := time.now + t * 3600000
+    while time.now < end_time;
 }
 
-main :: {
-  sleep_second(60)
-  sleep_minute(1)
-  sleep_hour(0.017)
+main :: () {
+    sleep_second(60)
+    sleep_minute(1)
+    sleep_hour(0.017)
 }

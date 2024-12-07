@@ -1,14 +1,14 @@
-use cli {*}
+import term {*}
 
-main :: {
-  numbers := [1, 2, 3, 4, 5, 6]
-  numbers.per(write("${it}: hi": Line))
+main :: () {
+    numbers := [1, 2, 3, 4, 5, 6]
+    numbers.per => write("${it}: hi": Line)
 
-  doubled_numbers = numbers
-    |> filter(it % 2 == 0)
-    |> map(it * 2)
-    |> per(write(it: Word))
-    // 4 8 12
+    doubled_numbers = numbers
+        |> filter => it % 2 == 0
+        |> map => it * 2
+        |> per => write(it: Word)
+    # 4 8 12
   
-  // Also map filter per is fp features
+    # Also map filter per is fp features
 }

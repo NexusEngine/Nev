@@ -1,4 +1,4 @@
-import cli {*}
+import term {*}
 
 # Instead of doing this
 module test1
@@ -19,9 +19,9 @@ print_word :: (message str) {
 module test2
 
 WriteMessage[str] :: case {
-  Text
-  Line
-  Word
+    Text
+    Line
+    Word
 }
 
 print :: (message WriteMessage) {
@@ -36,8 +36,8 @@ print :: (message WriteMessage) {
 module main
 
 main :: () {
-  test1.print("hello,")
-  test1.print_line(" world")
-  test2.print("hello,")
-  test2.print(" world": Line)
+    test1.print("hello,")
+    test1.print_line(" world")
+    test2.print("hello,")
+    test2.print(" world": Line)
 }

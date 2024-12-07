@@ -1,33 +1,33 @@
-Person :: Kind {
-  name: Str
-  age: U8
+Person :: data {
+    name str
+    age  u8
 
-  get_status :: Status {
-    back if age {
-      > 18 => Active
-      _ => Inactive
+    get_status :: () Status {
+        return match age {
+            > 18 => Active
+            _ => Inactive
+        }
     }
-  }
 }
 
-Status :: Enum {
-  Active
-  Inactive
+Status :: enum {
+    Active
+    Inactive
 }
 
 
-check_people(people: [Person]) {
-  for p in people {
-    status := p.get_status
-    write("Person: $p.name is $status")
-  }
+check_people :: (people []Person) {
+    for p in people {
+        status := p.get_status
+        write"Person: $p.name is $status": Line
+    }
 }
 
-main :: {
-  people := [
-    Person { name: "Alice", age: 22 }
-    Person { name: "Bob", age: 16 }
-  ]
+main :: () {
+    people := [
+        Person { name: "Alice", age: 22 }
+        Person { name: "Bob", age: 16 }
+    ]
 
-  check_people(people)
+    check_people(people)
 }
